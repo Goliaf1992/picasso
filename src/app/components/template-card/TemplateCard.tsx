@@ -2,7 +2,18 @@
 import React from "react";
 import ImplantModelWithSuspense from "../implant-model/ImplantModel";
 
-const TemplateCard = ({ template }) => {
+interface Template {
+  id: number;
+  title: string;
+  description: string;
+  modelUrl: string;
+}
+
+interface TemplateCardProps {
+  template: Template;
+}
+
+const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-shadow duration-300">
       {/* Контейнер для 3D-модели */}
