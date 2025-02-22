@@ -1,6 +1,10 @@
 "use client";
 import React from "react";
-import ImplantModelWithSuspense from "../implant-model/ImplantModel";
+const ImplantModelWithSuspense = dynamic(
+  () => import("../implant-model/ImplantModel"),
+  { ssr: false }
+);
+import dynamic from "next/dynamic";
 
 interface Template {
   id: number;
