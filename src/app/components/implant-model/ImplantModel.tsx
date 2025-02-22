@@ -1,12 +1,10 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Bounds } from "@react-three/drei";
-
-type ImplantModelProps = {
-  url: string;
-};
+import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
+import { Suspense } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { OrbitControls, Bounds, Html } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 declare module "react" {
   namespace JSX {
@@ -14,29 +12,26 @@ declare module "react" {
       ambientLight: any;
       directionalLight: any;
       primitive: any;
+      group: any;
     }
   }
 }
 
+type ImplantModelProps = {
+  url: string;
+};
+
 const ImplantModel: React.FC<ImplantModelProps> = ({ url }) => {
-  const { scene } = useGLTF(url);
-  const clone = useMemo(() => scene.clone(), [scene]);
-  console.log("Loaded scene:", scene);
+  const gltf = useLoader(GLTFLoader, url);
+  const clonedScene = clone(gltf.scene);
+
   return (
-    <Canvas
-      className="bg-grey absolute top-0 left-0 w-full h-full"
-      camera={{ position: [0, 0, 5], fov: 10 }}
-    >
-      {/* Освещение */}
+    <group>
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, 2, 2]} intensity={1} />
-
-      {/* Контейнер для модели */}
       <Bounds fit clip observe margin={1.5}>
-        <primitive position={[0, -45, 0]} object={clone} scale={0.8} />
+        <primitive position={[0, -45, 0]} object={clonedScene} scale={0.8} />
       </Bounds>
-
-      {/* Управление камерой */}
       <OrbitControls
         makeDefault
         enableZoom={false}
@@ -44,14 +39,21 @@ const ImplantModel: React.FC<ImplantModelProps> = ({ url }) => {
         minPolarAngle={Math.PI / 2.5}
         maxPolarAngle={Math.PI / 1.5}
       />
+    </group>
+  );
+};
+
+const ImplantModelWithSuspense: React.FC<{ url: string }> = ({ url }) => {
+  return (
+    <Canvas
+      className="bg-grey absolute top-0 left-0 w-full h-full"
+      camera={{ position: [0, 0, 5], fov: 10 }}
+    >
+      <Suspense fallback={<Html center>Загрузка модели...</Html>}>
+        <ImplantModel url={url} />
+      </Suspense>
     </Canvas>
   );
 };
 
-export default function ImplantModelWithSuspense({ url }: { url: string }) {
-  return (
-    <Suspense fallback={<div>Загрузка модели...</div>}>
-      <ImplantModel url={url} />
-    </Suspense>
-  );
-}
+export default ImplantModelWithSuspense;
