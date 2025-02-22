@@ -2,9 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   basePath: "",
-  assetPrefix: process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "",
+  assetPrefix: "",
 
   async headers() {
     return [

@@ -8,19 +8,19 @@ export default function page() {
       id: 1,
       title: "Шаблон для имплантов #1",
       description: "Идеально подходит для сложных операций.",
-      modelUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/scene.gltf`, // Путь к модели
+      modelUrl: "/models/scene.gltf", // Путь к модели
     },
     {
       id: 2,
       title: "Шаблон для имплантов #2",
       description: "Высокая точность и надежность.",
-      modelUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/scene.gltf`,
+      modelUrl: "/models/scene.gltf",
     },
     {
       id: 3,
       title: "Шаблон для имплантов #3",
       description: "Инновационный дизайн.",
-      modelUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/models/scene.gltf`,
+      modelUrl: "/models/scene.gltf",
     },
   ];
 
