@@ -68,7 +68,7 @@ export default function TemplateDetailPage({
     if (foundTemplate) {
       setTemplate(foundTemplate);
     } else {
-      router.push("/"); // Перенаправление, если id не найден
+      router.push("/");
     }
   }, [params.id, router]);
 
@@ -77,7 +77,7 @@ export default function TemplateDetailPage({
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 px-4 sm:px-6 lg:px-8 py-8">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 px-4 sm:px-6 lg:px-8 py-8 rounded-[0%_0%_50%_50%_/_50%_50%_70px_70px]">
       {/* Кнопка назад */}
       <button
         className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg shadow-lg text-sm sm:text-base"
@@ -110,6 +110,27 @@ export default function TemplateDetailPage({
       <button className="mt-8 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg text-lg shadow-lg transition w-full sm:w-auto">
         Заказать шаблон
       </button>
+
+      {/* Волнообразный разделитель */}
     </div>
   );
 }
+
+/* function WaveDivider() {
+  return (
+    <div className="absolute inset-x-0 bottom-0 w-full overflow-hidden leading-none z-0">
+      <svg
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+        className="relative block w-full h-[100px] sm:h-[150px] md:h-[180px] scale-y-[-1]"
+      >
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+          className="fill-[#312e81]"
+        ></path>
+      </svg>
+    </div>
+  );
+} */

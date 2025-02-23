@@ -17,10 +17,7 @@ export default function RootLayout({
       <body className="no-scrollbar overflow-auto h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
         <Navbar />
 
-        <main className="container mx-auto px-4">{children}</main>
-        <footer className="p-6 text-center text-sm opacity-75">
-          &copy; 2024 | Все права защищены
-        </footer>
+        <main className="w-full">{children}</main>
       </body>
     </html>
   );

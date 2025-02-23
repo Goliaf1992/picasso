@@ -11,6 +11,7 @@
     --color-text-primary: #d8b4fe; /* text-purple-300 */
     --color-text-secondary: #ffffff; /* text-white */
     --color-text-accent: #4a044e;
+    --color-text-gray: rgb(55 65 81);
   }
 }
 
