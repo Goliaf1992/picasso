@@ -2,14 +2,14 @@ import React from "react";
 
 export default function VideoLogo() {
   return (
-    <div className="w-[100%] h-[50%] m-5 flex items-center justify-center">
+    <div className="w-full flex items-center justify-center my-5">
       <video
         src="/video/vid2.mp4"
         autoPlay
         loop
         muted
         playsInline
-        className="w-[500px] h-[500px] object-cover bg-red rounded-full"
+        className="w-[90vw] max-w-xs sm:max-w-md md:max-w-lg aspect-square object-cover rounded-full"
       />
     </div>
   );
