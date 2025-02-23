@@ -14,9 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body className="no-scrollbar overflow-auto h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+      </head>
+      <body className="no-scrollbar overflow-auto min-h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
         <Navbar />
-
         <main className="w-full">{children}</main>
       </body>
     </html>
