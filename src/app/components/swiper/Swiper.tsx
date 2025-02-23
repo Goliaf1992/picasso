@@ -35,14 +35,16 @@ const MySwiper = () => {
     >
       {reviews.map((doctor, index) => (
         <SwiperSlide key={index}>
-          <div className=" text-black p-11 rounded-lg  flex flex-col items-center text-center h-fit">
+          <div className="text-black p-11 rounded-lg flex flex-col items-center text-center w-full h-[500px] md:h-[600px] lg:h-[700px] justify-around">
             <img
               src={doctor.avatar}
               alt={doctor.name}
-              className="w-1/3 h-1/2 rounded-full mb-4"
+              className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full mb-6"
             />
             <p className="text-lg font-semibold">{doctor.name}</p>
-            <p className="text-sm text-gray-600">{doctor.review}</p>
+            <p className="text-sm md:text-base text-gray-600 text-justify max-w-2xl">
+              {doctor.review}
+            </p>
           </div>
         </SwiperSlide>
       ))}
