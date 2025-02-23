@@ -26,12 +26,7 @@ const Navbar = () => {
             >
               Главная
             </Link>
-            <Link
-              href="/templates"
-              className="text-purple-900 hover:text-purple-700 transition-colors"
-            >
-              Шаблоны
-            </Link>
+
             <Link
               href="/about"
               className="text-purple-900 hover:text-purple-700 transition-colors"

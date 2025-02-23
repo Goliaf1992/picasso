@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+
 const ImplantModelWithSuspense = dynamic(
   () => import("../implant-model/ImplantModel"),
   { ssr: false }
 );
-import dynamic from "next/dynamic";
 
 interface Template {
   id: number;
@@ -18,14 +20,14 @@ interface TemplateCardProps {
 }
 
 const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
+  const router = useRouter();
+
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-shadow duration-300">
-      {/* Контейнер для 3D-модели */}
       <div className="h-64 w-full bg-gray-100 flex items-center justify-center relative">
-        <ImplantModelWithSuspense url={"/models/scene.gltf"} />
+        <ImplantModelWithSuspense url={template.modelUrl} />
       </div>
 
-      {/* Описание шаблона */}
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-2 text-[var(--color-text-accent)]">
           {template.title}
@@ -33,9 +35,11 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
         <p className="text-gray-600">{template.description}</p>
       </div>
 
-      {/* Кнопка для деталей (можно добавить функционал) */}
       <div className="p-4 bg-gray-50">
-        <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors duration-300">
+        <button
+          onClick={() => router.push(`/templates/${template.id}`)}
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors duration-300"
+        >
           Подробнее
         </button>
       </div>
