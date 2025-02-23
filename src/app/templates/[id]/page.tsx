@@ -77,7 +77,11 @@ export default function TemplateDetailPage({
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 px-4 sm:px-6 lg:px-8 py-8 rounded-[0%_0%_50%_50%_/_50%_50%_70px_70px]">
+    <div
+      className="relative min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 px-4 sm:px-6 lg:px-8 py-8 rounded-[0%_0%_30%_30%_/_30%_30%_40px_40px] 
+      sm:rounded-[0%_0%_40%_40%_/_40%_40%_50px_50px] 
+      md:rounded-[0%_0%_50%_50%_/_50%_50%_70px_70px] "
+    >
       {/* Кнопка назад */}
       <button
         className="absolute top-4 left-4 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg shadow-lg text-sm sm:text-base"
