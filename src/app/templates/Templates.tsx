@@ -27,7 +27,6 @@ export const products = [
 export default function Templates() {
   return (
     <section className="p-8 text-centerbg-gradient-to-b from-purple-900 to-white text-center text-white flex-col justify-between">
-      <ImplantModelWithSuspense url="/models/scene.gltf" />
       <h1 className="text-4xl font-bold mb-6">Наша продукция</h1>
       <div className="grid md:grid-cols-3 gap-6">
         {products.map((product) => (

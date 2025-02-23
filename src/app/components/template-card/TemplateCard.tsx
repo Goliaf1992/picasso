@@ -27,7 +27,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
 
       {/* Описание шаблона */}
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-2 text-purple-900">
+        <h2 className="text-2xl font-bold mb-2 text-[var(--color-text-accent)]">
           {template.title}
         </h2>
         <p className="text-gray-600">{template.description}</p>

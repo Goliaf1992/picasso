@@ -3,15 +3,14 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-gradient-start: #9333ea; /* from-purple-600 */
+    --color-gradient-end: #312e81; /* to-indigo-900 */
+    --color-text-primary: #d8b4fe; /* text-purple-300 */
+    --color-text-secondary: #ffffff; /* text-white */
+    --color-text-accent: #4a044e;
   }
 }
 

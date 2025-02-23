@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
-import ImplantModelWithSuspense from "./components/implant-model/ImplantModel";
 
 export const metadata: Metadata = {
   title: "picasso-lab",
@@ -15,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body className="no-scrollbar overflow-auto h-screen bg-gradient-to-r from-purple-600 to-indigo-900 text-white flex flex-col justify-between">
+      <body className="no-scrollbar overflow-auto h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
         <Navbar />
 
         <main className="container mx-auto px-4">{children}</main>

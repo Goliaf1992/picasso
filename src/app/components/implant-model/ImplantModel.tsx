@@ -3,8 +3,9 @@
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, Bounds, Html } from "@react-three/drei";
+import { OrbitControls, Bounds } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Spinner } from "../spinner/Spinner";
 
 declare module "react" {
   namespace JSX {
@@ -49,7 +50,7 @@ const ImplantModelWithSuspense: React.FC<{ url: string }> = ({ url }) => {
       className="bg-grey absolute top-0 left-0 w-full h-full"
       camera={{ position: [0, 0, 5], fov: 10 }}
     >
-      <Suspense fallback={<Html center>Загрузка модели...</Html>}>
+      <Suspense fallback={<Spinner />}>
         <ImplantModel url={url} />
       </Suspense>
     </Canvas>
