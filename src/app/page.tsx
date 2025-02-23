@@ -8,19 +8,19 @@ export default function page() {
   const templates = [
     {
       id: 1,
-      title: "Шаблон для имплантов #1",
+      title: "Пилотный протокол",
       description: "Идеально подходит для сложных операций.",
       modelUrl: "/models/scene.gltf", // Путь к модели
     },
     {
       id: 2,
-      title: "Шаблон для имплантов #2",
+      title: "Полный протокол",
       description: "Высокая точность и надежность.",
       modelUrl: "/models/scene.gltf",
     },
     {
       id: 3,
-      title: "Шаблон для имплантов #3",
+      title: "Разборный шаблон",
       description: "Инновационный дизайн.",
       modelUrl: "/models/scene.gltf",
     },

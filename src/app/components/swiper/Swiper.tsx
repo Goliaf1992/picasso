@@ -31,11 +31,11 @@ const MySwiper = () => {
       modules={[Navigation, Pagination]}
       navigation
       pagination={{ clickable: true }}
-      className="w-full max-w-3xl"
+      className="w-full max-w-3xl bg-white rounded-xl"
     >
       {reviews.map((doctor, index) => (
         <SwiperSlide key={index}>
-          <div className="bg-white text-black p-11 rounded-lg shadow-md flex flex-col items-center text-center h-fit">
+          <div className=" text-black p-11 rounded-lg  flex flex-col items-center text-center h-fit">
             <img
               src={doctor.avatar}
               alt={doctor.name}
