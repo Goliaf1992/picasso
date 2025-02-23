@@ -49,7 +49,7 @@ export default function Page() {
       sm:rounded-[0%_0%_40%_40%_/_40%_40%_50px_50px] 
       md:rounded-[0%_0%_50%_50%_/_50%_50%_70px_70px]  -mt-[67px]"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in text-[var(--color-text-gray)]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in text-[var(--color-text-gray)] !pt-[67px] !pb-[67px] sm:pt-0 sm:pb-0">
           Попробуйте сейчас
         </h1>
         <div className="container max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
