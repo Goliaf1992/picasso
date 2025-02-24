@@ -61,7 +61,7 @@ export default function Page() {
 
       {/* Секция с отзывами */}
       <section className="container max-w-7xl px-4 sm:px-6 lg:px-8 h-auto min-h-screen py-20 text-center flex flex-col items-center justify-around">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in !pt-[67px] !pb-[67px]">
           Отзывы врачей
         </h1>
         <MySwiper />

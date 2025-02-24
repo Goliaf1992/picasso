@@ -22,6 +22,7 @@ export default function RootLayout({
       </head>
       <body className="no-scrollbar overflow-auto min-h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
         <Navbar />
+        <div className="h-20"></div> 
         <main className="w-full">{children}</main>
       </body>
     </html>
