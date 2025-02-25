@@ -72,12 +72,7 @@ const Navbar = () => {
             >
               Главная
             </Link>
-            <Link
-              href="/templates"
-              className="block px-4 py-2 text-purple-900 hover:bg-purple-50"
-            >
-              Шаблоны
-            </Link>
+          
             <Link
               href="/about"
               className="block px-4 py-2 text-purple-900 hover:bg-purple-50"
