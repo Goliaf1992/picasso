@@ -13,6 +13,7 @@ interface Template {
   title: string;
   description: string;
   modelUrl: string;
+  jawUrl:string;
 }
 
 interface TemplateCardProps {
@@ -25,7 +26,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-shadow duration-300">
       <div className="h-64 w-full bg-gray-100 flex items-center justify-center relative">
-        <ImplantModelWithSuspense url={template.modelUrl} />
+        <ImplantModelWithSuspense urls={{base:template.modelUrl, extra:template.jawUrl}} />
       </div>
 
       <div className="p-6">

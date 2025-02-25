@@ -1,11 +1,13 @@
 "use client";
 
+import { OrbitControls } from "@react-three/drei";
+import { useMemo, useState } from "react";
 import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, Bounds } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Spinner } from "../spinner/Spinner";
+import { Bounds } from '@react-three/drei';
 
 declare module "react" {
   namespace JSX {
@@ -19,41 +21,64 @@ declare module "react" {
 }
 
 type ImplantModelProps = {
-  url: string;
+  urls: { base: string; extra: string }; // Base model + extra layer
+  showExtra: boolean;
 };
 
-const ImplantModel: React.FC<ImplantModelProps> = ({ url }) => {
-  const gltf = useLoader(GLTFLoader, url);
-  const clonedScene = clone(gltf.scene);
+const ImplantModel: React.FC<ImplantModelProps> = ({ urls, showExtra }) => {
+  const baseGltf = useLoader(GLTFLoader, urls.base);
+  const extraGltf = useLoader(GLTFLoader, urls.extra);
+
+  const baseScene = useMemo(() => clone(baseGltf.scene), [baseGltf]);
+  const extraScene = useMemo(() => clone(extraGltf.scene), [extraGltf]);
 
   return (
     <group>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[0, 2, 2]} intensity={1} />
+      <directionalLight position={[0, 0, 2]} intensity={3} />
       <Bounds fit clip observe margin={1.5}>
-        <primitive position={[0, -45, 0]} object={clonedScene} scale={0.8} />
+        {/* Base Model */}
+        <primitive position={[0, -45, 0]} object={baseScene} scale={0.8}    />
+        {/* Extra Layer Model (conditionally rendered) */}
+        {showExtra && (
+          <primitive position={[0, -45, 0]} object={extraScene} scale={0.8} />
+        )}
       </Bounds>
-      <OrbitControls
-        makeDefault
-        enableZoom={false}
-        enablePan={false}
-        minPolarAngle={Math.PI / 2.5}
+
+      {/* Ensure OrbitControls is properly configured */}
+      <OrbitControls 
+        makeDefault 
+        enableZoom={true}  // Enable zoom
+        enablePan={false}  // Disable panning
+        minPolarAngle={Math.PI / 4} 
         maxPolarAngle={Math.PI / 1.5}
       />
     </group>
   );
 };
 
-const ImplantModelWithSuspense: React.FC<{ url: string }> = ({ url }) => {
+const ImplantModelWithSuspense: React.FC<{ urls: { base: string; extra: string } }> = ({ urls }) => {
+  const [showExtra, setShowExtra] = useState(false);
+
   return (
-    <Canvas
-      className="bg-grey absolute top-0 left-0 w-full h-full"
-      camera={{ position: [0, 0, 5], fov: 10 }}
-    >
-      <Suspense fallback={<Spinner />}>
-        <ImplantModel url={url} />
-      </Suspense>
-    </Canvas>
+    <div className="relative w-full h-full">
+      {/* Toggle button stays outside of Canvas */}
+      <button
+        className="absolute top-4 left-4 px-4 py-2 bg-white text-black rounded shadow-md z-10"
+        onClick={() => setShowExtra((prev) => !prev)}
+      >
+        Toggle Layer
+      </button>
+
+      <Canvas
+        className="bg-grey absolute top-0 left-0 w-full h-full cursor-grab"
+        camera={{ position: [0, 0, 5], fov: 50 }} // Increased FOV for better zoom
+      >
+        <Suspense fallback={<Spinner />}>
+          <ImplantModel urls={urls} showExtra={showExtra} />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 };
 

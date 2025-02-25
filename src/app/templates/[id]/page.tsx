@@ -10,12 +10,13 @@ const ImplantModelWithSuspense = dynamic(
 );
 
 // Интерфейс шаблона
-interface Template {
+export default interface Template {
   id: number;
   title: string;
   description: string;
   details: string;
   modelUrl: string;
+  jawUrl:string;
 }
 
 // Фейковые данные (потом можно заменить API-запросом)
@@ -29,7 +30,8 @@ const templates: Template[] = [
       "Пилотный протокол предназначен для первичного позиционирования имплантов с высокой точностью. " +
       "Обеспечивает безопасное проведение сложных хирургических манипуляций, минимизирует погрешности " +
       "и ускоряет процесс имплантации. Отличный выбор для опытных хирургов, работающих с нестандартными случаями.",
-    modelUrl: "/models/scene.gltf",
+    modelUrl: "/models/guide.glb",
+    jawUrl:"/models/jaw-lower/lower.glb"
   },
   {
     id: 2,
@@ -40,7 +42,8 @@ const templates: Template[] = [
       "Полный протокол — это многоуровневый хирургический шаблон, обеспечивающий точное сверление " +
       "и установку имплантов. Благодаря дополнительным направляющим и фиксаторам, он снижает риск ошибок " +
       "и повышает долговечность результатов операции. Подходит для широкого спектра клинических случаев.",
-    modelUrl: "/models/scene.gltf",
+    modelUrl: "/models/guide.glb",
+    jawUrl:"/models/jaw-lower/lower.glb"
   },
   {
     id: 3,
@@ -51,7 +54,8 @@ const templates: Template[] = [
       "Разборный шаблон представляет собой инновационную конструкцию, позволяющую адаптироваться " +
       "под различные анатомические особенности пациента. Он идеально подходит для случаев, когда требуется " +
       "пошаговая установка имплантов с возможностью корректировки в процессе операции.",
-    modelUrl: "/models/scene.gltf",
+    modelUrl: "/models/guide.glb",
+    jawUrl:"/models/jaw-lower/lower.glb"
   },
 ];
 
@@ -97,7 +101,7 @@ export default function TemplateDetailPage({
 
       {/* Контейнер для 3D-модели */}
       <div className="h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl bg-gray-200 flex items-center justify-center rounded-lg shadow-xl p-4">
-        <ImplantModelWithSuspense url={template.modelUrl} />
+        <ImplantModelWithSuspense urls={{base:template.modelUrl, extra:template.jawUrl}} />
       </div>
 
       {/* Описание */}
