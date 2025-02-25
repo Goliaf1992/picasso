@@ -18,7 +18,7 @@ export default function Advantages() {
       <h2 className="text-2xl md:text-4xl font-bold text-center mb-8">
         Наши преимущества
       </h2>
-      <div className="container max-w-[90%] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-hidden">
+      <div className="container max-w-[90%] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-x-hidden">
         {advantages.map((advantage, index) => (
           <motion.div
             key={index}
