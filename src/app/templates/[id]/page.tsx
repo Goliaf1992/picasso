@@ -10,7 +10,7 @@ const ImplantModelWithSuspense = dynamic(
 );
 
 // Интерфейс шаблона
-export default interface Template {
+export  interface Template {
   id: number;
   title: string;
   description: string;

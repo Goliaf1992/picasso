@@ -3,7 +3,7 @@ import React from "react";
 import TemplateCard from "../app/components/template-card/TemplateCard";
 import MySwiper from "./components/swiper/Swiper";
 import VideoLogo from "./components/video-logo/VideoLogo";
-import Template from '../app/templates/[id]/page';
+import {Template} from '../app/templates/[id]/page';
 
 export default function Page() {
   const templates: Template[] = [
