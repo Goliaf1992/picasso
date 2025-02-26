@@ -6,6 +6,7 @@ import { clone } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { Spinner } from "../spinner/Spinner";
 import { Bounds } from '@react-three/drei';
 
@@ -26,8 +27,18 @@ type ImplantModelProps = {
 };
 
 const ImplantModel: React.FC<ImplantModelProps> = ({ urls, showExtra }) => {
-  const baseGltf = useLoader(GLTFLoader, urls.base);
-  const extraGltf = useLoader(GLTFLoader, urls.extra);
+  const dracoLoader = useMemo(() => {
+    const loader = new DRACOLoader();
+    loader.setDecoderPath('/draco/'); // Set the path to the Draco decoder
+    return loader;
+  }, []);
+
+  const baseGltf = useLoader(GLTFLoader, urls.base, loader => {
+    loader.setDRACOLoader(dracoLoader);
+  });
+  const extraGltf = useLoader(GLTFLoader, urls.extra, loader => {
+    loader.setDRACOLoader(dracoLoader);
+  });
 
   const baseScene = useMemo(() => clone(baseGltf.scene), [baseGltf]);
   const extraScene = useMemo(() => clone(extraGltf.scene), [extraGltf]);
@@ -38,10 +49,20 @@ const ImplantModel: React.FC<ImplantModelProps> = ({ urls, showExtra }) => {
       <directionalLight position={[0, 0, 2]} intensity={3} />
       <Bounds fit clip observe margin={1.5}>
         {/* Base Model */}
-        <primitive position={[0, -45, 0]} object={baseScene} scale={0.8}    />
+        <primitive 
+          position={[0, -45, 0]} 
+          object={baseScene} 
+          scale={0.8} 
+          rotation={[0, 0, Math.PI / 4]} // Adjusted initial Z-axis rotation
+        />
         {/* Extra Layer Model (conditionally rendered) */}
         {showExtra && (
-          <primitive position={[0, -45, 0]} object={extraScene} scale={0.8} />
+          <primitive 
+            position={[0, -45, 0]} 
+            object={extraScene} 
+            scale={0.8} 
+            rotation={[0, 0, Math.PI / 4]} // Adjusted initial Z-axis rotation
+          />
         )}
       </Bounds>
 
