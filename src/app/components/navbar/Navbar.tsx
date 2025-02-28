@@ -65,14 +65,14 @@ const Navbar = () => {
 
         {/* Мобильное меню */}
         {isOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-md mt-2 py-4 rounded-lg shadow-lg">
+          <div className="md:hidden backdrop-blur-md mt-2 py-4 rounded-lg shadow-lg">
             <Link
               href="/"
               className="block px-4 py-2 text-purple-900 hover:bg-purple-50"
             >
               Главная
             </Link>
-          
+
             <Link
               href="/about"
               className="block px-4 py-2 text-purple-900 hover:bg-purple-50"
