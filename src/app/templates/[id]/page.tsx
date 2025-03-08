@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-
+import Link from "next/link";
 // Динамическая загрузка 3D-модели
 const ImplantModelWithSuspense = dynamic(
   () => import("../../components/implant-model/ImplantModel"),
@@ -10,13 +10,13 @@ const ImplantModelWithSuspense = dynamic(
 );
 
 // Интерфейс шаблона
-export  interface Template {
+export interface Template {
   id: number;
   title: string;
   description: string;
   details: string;
   modelUrl: string;
-  jawUrl:string;
+  jawUrl: string;
 }
 
 // Фейковые данные (потом можно заменить API-запросом)
@@ -31,7 +31,7 @@ const templates: Template[] = [
       "Обеспечивает безопасное проведение сложных хирургических манипуляций, минимизирует погрешности " +
       "и ускоряет процесс имплантации. Отличный выбор для опытных хирургов, работающих с нестандартными случаями.",
     modelUrl: "/models/guide.glb",
-    jawUrl:"/models/jaw-lower/lower.glb"
+    jawUrl: "/models/jaw-lower/lower.glb",
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const templates: Template[] = [
       "и установку имплантов. Благодаря дополнительным направляющим и фиксаторам, он снижает риск ошибок " +
       "и повышает долговечность результатов операции. Подходит для широкого спектра клинических случаев.",
     modelUrl: "/models/guide.glb",
-    jawUrl:"/models/jaw-lower/lower.glb"
+    jawUrl: "/models/jaw-lower/lower.glb",
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ const templates: Template[] = [
       "под различные анатомические особенности пациента. Он идеально подходит для случаев, когда требуется " +
       "пошаговая установка имплантов с возможностью корректировки в процессе операции.",
     modelUrl: "/models/guide.glb",
-    jawUrl:"/models/jaw-lower/lower.glb"
+    jawUrl: "/models/jaw-lower/lower.glb",
   },
 ];
 
@@ -101,7 +101,9 @@ export default function TemplateDetailPage({
 
       {/* Контейнер для 3D-модели */}
       <div className="h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-3xl bg-gray-200 flex items-center justify-center rounded-lg shadow-xl p-4">
-        <ImplantModelWithSuspense urls={{base:template.modelUrl, extra:template.jawUrl}} />
+        <ImplantModelWithSuspense
+          urls={{ base: template.modelUrl, extra: template.jawUrl }}
+        />
       </div>
 
       {/* Описание */}
@@ -116,7 +118,7 @@ export default function TemplateDetailPage({
 
       {/* Кнопка заказа */}
       <button className="mt-8 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg text-lg shadow-lg transition w-full sm:w-auto">
-        Заказать шаблон
+        <Link href={"/order"}>Заказать шаблон</Link>
       </button>
 
       {/* Волнообразный разделитель */}

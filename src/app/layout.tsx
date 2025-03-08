@@ -20,10 +20,10 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
       </head>
-      <body className="no-scrollbar overflow-auto min-h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col justify-between">
+      <body className="no-scrollbar overflow-auto min-h-screen bg-gradient-to-r from-[var(--color-gradient-start)] to-[var(--color-gradient-end)] text-[var(--color-text-primary)] flex flex-col align-middle justify-between">
         <Navbar />
-        <div className="h-20"></div> 
-        <main className="w-full">{children}</main>
+        <div className="h-20"></div>
+        <main className="flex-col align-center w-full flex-1">{children}</main>
       </body>
     </html>
   );

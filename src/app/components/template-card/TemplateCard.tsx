@@ -1,19 +1,14 @@
 "use client";
 import React from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-
-const ImplantModelWithSuspense = dynamic(
-  () => import("../implant-model/ImplantModel"),
-  { ssr: false }
-);
+import Image from "next/image";
 
 interface Template {
   id: number;
   title: string;
   description: string;
   modelUrl: string;
-  jawUrl:string;
+  jawUrl: string;
 }
 
 interface TemplateCardProps {
@@ -26,7 +21,13 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-shadow duration-300">
       <div className="h-64 w-full bg-gray-100 flex items-center justify-center relative">
-        <ImplantModelWithSuspense urls={{base:template.modelUrl, extra:template.jawUrl}} />
+        <Image
+          src="/template-photo/template.jpg"
+          alt="Template"
+          width={600}
+          height={400}
+          className="rounded-lg"
+        />
       </div>
 
       <div className="p-6">
