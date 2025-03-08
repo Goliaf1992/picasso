@@ -23,20 +23,28 @@ export default async function handler(
       .json({ error: "URL вебхука не найден в переменных окружения" });
   }
 
+  // Проверка, что метод запроса POST
   if (req.method === "POST") {
-    // Дескриптор данных из тела запроса
-    const { name, email, phone }: LeadData = req.body;
-
-    const data = {
-      fields: {
-        TITLE: "Новый лид с сайта Picasso Company",
-        NAME: name,
-        EMAIL: [{ VALUE: email, VALUE_TYPE: "WORK" }],
-        PHONE: [{ VALUE: phone, VALUE_TYPE: "WORK" }],
-      },
-    };
-
     try {
+      const { name, email, phone }: LeadData = req.body;
+
+      // Проверка на обязательные данные
+      if (!name || !email || !phone) {
+        return res.status(400).json({
+          error: "Все поля (name, email, phone) обязательны для заполнения",
+        });
+      }
+
+      const data = {
+        fields: {
+          TITLE: "Новый лид с сайта Picasso Company",
+          NAME: name,
+          EMAIL: [{ VALUE: email, VALUE_TYPE: "WORK" }],
+          PHONE: [{ VALUE: phone, VALUE_TYPE: "WORK" }],
+        },
+      };
+
+      // Отправка данных в Bitrix24 через вебхук
       const response = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,15 +52,22 @@ export default async function handler(
       });
 
       const result = await response.json();
+
+      // Если вебхук вернул успешный ответ
       if (result.result) {
-        res.status(200).json({ message: "Лид успешно создан!" });
+        return res.status(200).json({ message: "Лид успешно создан!" });
       } else {
-        res.status(500).json({ error: "Ошибка при создании лида" });
+        return res.status(500).json({
+          error: `Ошибка при создании лида: ${JSON.stringify(result)}`,
+        });
       }
     } catch (error) {
-      res.status(500).json({ error: "Ошибка при отправке данных" });
+      // Логируем ошибку для удобства отладки
+      console.error("Ошибка при отправке данных в Bitrix24:", error);
+      return res.status(500).json({ error: "Ошибка при отправке данных" });
     }
   } else {
-    res.status(405).json({ error: "Метод не поддерживается" });
+    // Если метод не поддерживается
+    return res.status(405).json({ error: "Метод не поддерживается" });
   }
 }
