@@ -1,8 +1,31 @@
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+type LeadData = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+type ApiResponse = {
+  message?: string;
+  error?: string;
+};
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiResponse>
+) {
   const webhookUrl = process.env.BITRIX_WEBHOOK_ADD_LEAD; // Получаем URL вебхука из переменной окружения
 
+  if (!webhookUrl) {
+    return res
+      .status(500)
+      .json({ error: "URL вебхука не найден в переменных окружения" });
+  }
+
   if (req.method === "POST") {
-    const { name, email, phone } = req.body;
+    // Дескриптор данных из тела запроса
+    const { name, email, phone }: LeadData = req.body;
 
     const data = {
       fields: {
