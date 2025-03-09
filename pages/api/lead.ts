@@ -16,7 +16,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ApiResponse>
 ) {
-  const webhookUrl = process.env.BITRIX_WEBHOOK_ADD_LEAD; // Получаем URL вебхука из переменной окружения
+  const webhookUrl = process.env.BITRIX_WEBHOOK_ADD_LEAD?.trim(); // Получаем URL вебхука из переменной окружения
 
   if (!webhookUrl) {
     return res
