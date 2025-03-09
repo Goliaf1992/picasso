@@ -31,7 +31,7 @@ export default async function handler(
       const { name, email, phone, interest }: LeadData = req.body;
 
       // Проверка на обязательные данные
-      if (!name || !email || !phone || !interest) {
+      if (!name || !email || !phone) {
         return res.status(400).json({
           error: "Все поля (name, email, phone) обязательны для заполнения",
         });
@@ -43,7 +43,7 @@ export default async function handler(
           NAME: name,
           EMAIL: [{ VALUE: email, VALUE_TYPE: "WORK" }],
           PHONE: [{ VALUE: phone, VALUE_TYPE: "WORK" }],
-          UF_CRM_1741253974811:{value: interest, VALUE_TYPE: "WORK"}
+          UF_CRM_1741253974811: interest,
         },
       };
 

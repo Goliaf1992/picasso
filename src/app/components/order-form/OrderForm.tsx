@@ -9,6 +9,14 @@ type FormData = {
   interest: string; // новое поле для выбора предмета интереса
 };
 
+const interests = [
+  { id: "1941", label: "Шаблоны" },
+  { id: "1943", label: "Элайнеры" },
+  { id: "1945", label: "Ретенционные каппы" },
+  { id: "1947", label: "Интраоральное сканирование" },
+  { id: "1957", label: "Коронки" },
+];
+
 export default function OrderForm() {
   const {
     register,
@@ -23,6 +31,7 @@ export default function OrderForm() {
     setMessage("");
 
     try {
+      console.log(data);
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +52,7 @@ export default function OrderForm() {
   };
 
   return (
-    <div className="h-[50%] max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="h-[50%] max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg text-[var(--color-text-gray)]">
       <h2 className="text-xl font-semibold mb-4">Оставьте заявку</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
@@ -98,17 +107,17 @@ export default function OrderForm() {
           </label>
           <select
             id="interest"
-            {...register("interest", { required: "Выберите предмет интереса" })}
+            {...register("interest", {
+              required: "Поле обязательно для заполнения",
+            })}
             className="w-full p-2 border rounded"
           >
             <option value="">Выберите...</option>
-            <option value="Шаблоны">Шаблоны</option>
-            <option value="Элайнеры">Элайнеры</option>
-            <option value="Ретенционные каппы">Ретенционные каппы</option>
-            <option value="Интраоральное сканирование">
-              Интраоральное сканирование
-            </option>
-            <option value="Коронки">Коронки</option>
+            {interests.map((opt) => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
           </select>
           {errors.interest && (
             <p className="text-red-500 text-sm">{errors.interest.message}</p>
