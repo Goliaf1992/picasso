@@ -1,22 +1,24 @@
 "use client";
-"ts-ignore";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  interest: string; // новое поле для выбора предмета интереса
+};
 
 export default function OrderForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
     setMessage("");
 
@@ -24,13 +26,12 @@ export default function OrderForm() {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
       if (response.ok) {
         setMessage(result.message);
-        setFormData({ name: "", email: "", phone: "" });
       } else {
         setMessage("Ошибка: " + result.error);
       }
@@ -44,34 +45,76 @@ export default function OrderForm() {
   return (
     <div className="h-[50%] max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Оставьте заявку</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Ваше имя"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Ваш email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Ваш телефон"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <input
+            type="text"
+            placeholder="Ваше имя"
+            {...register("name", {
+              required: "Поле обязательно для заполнения",
+            })}
+            className="w-full p-2 border rounded"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
+        </div>
+
+        <div>
+          <input
+            type="email"
+            placeholder="Ваш email"
+            {...register("email", {
+              required: "Поле обязательно для заполнения",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                message: "Введите корректный email",
+              },
+            })}
+            className="w-full p-2 border rounded"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+        </div>
+
+        <div>
+          <input
+            type="tel"
+            placeholder="Ваш телефон"
+            {...register("phone", {
+              required: "Поле обязательно для заполнения",
+            })}
+            className="w-full p-2 border rounded"
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="interest" className="block mb-2">
+            Предмет интереса
+          </label>
+          <select
+            id="interest"
+            {...register("interest", { required: "Выберите предмет интереса" })}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Выберите...</option>
+            <option value="Шаблоны">Шаблоны</option>
+            <option value="Элайнеры">Элайнеры</option>
+            <option value="Ретенционные каппы">Ретенционные каппы</option>
+            <option value="Интраоральное сканирование">
+              Интраоральное сканирование
+            </option>
+            <option value="Коронки">Коронки</option>
+          </select>
+          {errors.interest && (
+            <p className="text-red-500 text-sm">{errors.interest.message}</p>
+          )}
+        </div>
+
         <button
           type="submit"
           disabled={loading}
@@ -80,6 +123,7 @@ export default function OrderForm() {
           {loading ? "Загрузка..." : "Отправить"}
         </button>
       </form>
+
       {message && <p className="mt-4 text-center text-green-600">{message}</p>}
     </div>
   );

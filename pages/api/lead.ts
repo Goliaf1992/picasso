@@ -4,6 +4,7 @@ type LeadData = {
   name: string;
   email: string;
   phone: string;
+  interest: string;
 };
 
 type ApiResponse = {
@@ -27,10 +28,10 @@ export default async function handler(
   // Проверка, что метод запроса POST
   if (req.method === "POST") {
     try {
-      const { name, email, phone }: LeadData = req.body;
+      const { name, email, phone, interest }: LeadData = req.body;
 
       // Проверка на обязательные данные
-      if (!name || !email || !phone) {
+      if (!name || !email || !phone || !interest) {
         return res.status(400).json({
           error: "Все поля (name, email, phone) обязательны для заполнения",
         });
@@ -42,6 +43,7 @@ export default async function handler(
           NAME: name,
           EMAIL: [{ VALUE: email, VALUE_TYPE: "WORK" }],
           PHONE: [{ VALUE: phone, VALUE_TYPE: "WORK" }],
+          UF_CRM_1741253974811:{value: interest, VALUE_TYPE: "WORK"}
         },
       };
 
