@@ -9,6 +9,7 @@ type LeadData = {
 type ApiResponse = {
   message?: string;
   error?: string;
+  details?: unknown;
 };
 
 export default async function handler(
@@ -61,10 +62,12 @@ export default async function handler(
           error: `Ошибка при создании лида: ${JSON.stringify(result)}`,
         });
       }
-    } catch (error) {
-      // Логируем ошибку для удобства отладки
-      console.error("Ошибка при отправке данных в Bitrix24:", error);
-      return res.status(500).json({ error: "Ошибка при отправке данных" });
+    } catch (error: any) {
+      console.error("❌ Ошибка при отправке данных в Bitrix24:", error);
+      return res.status(500).json({
+        error: "Ошибка при отправке данных",
+        details: error.message || JSON.stringify(error),
+      });
     }
   } else {
     // Если метод не поддерживается
