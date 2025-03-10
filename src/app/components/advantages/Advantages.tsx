@@ -197,7 +197,7 @@ export default function Advantages() {
   }, []);
 
   return (
-    <section className="min-h-screen py-16 px-4 md:px-8">
+    <section className="min-h-screen py-16 px-4 md:px-8 text-textLight">
       <h2 className="text-2xl md:text-4xl font-bold text-center mb-8">
         Наши преимущества
       </h2>

@@ -127,7 +127,7 @@ export default function OrderForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+          className="w-full bg-green-500 hover:bg-green-600 text-white p-2 rounded transition"
         >
           {loading ? "Загрузка..." : "Отправить"}
         </button>

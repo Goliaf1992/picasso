@@ -13,7 +13,7 @@ const Navbar = () => {
           {/* Логотип */}
           <Link
             href="/"
-            className="text-2xl font-bold text-purple-900 hover:text-purple-700 transition-colors"
+            className="text-2xl font-bold text-customPurple hover:text-customPurpleLight transition-colors"
           >
             <Logo />
           </Link>
@@ -22,20 +22,20 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-8">
             <Link
               href="/"
-              className="text-purple-900 hover:text-purple-700 transition-colors"
+              className="text-customPurple hover:text-customPurpleLight transition-colors"
             >
               Главная
             </Link>
 
             <Link
               href="/about"
-              className="text-purple-900 hover:text-purple-700 transition-colors"
+              className="text-customPurple hover:text-customPurpleLight transition-colors"
             >
               О нас
             </Link>
             <Link
               href="/contact"
-              className="text-purple-900 hover:text-purple-700 transition-colors"
+              className="text-customPurple hover:text-customPurpleLight transition-colors"
             >
               Контакты
             </Link>

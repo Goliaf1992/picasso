@@ -19,7 +19,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
   const router = useRouter();
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-shadow duration-300">
+    <div className="bg-white rounded-lg overflow-hidden shadow-2xl hover:shadow-customPurpleLight/50 transition-shadow duration-300">
       <div className="h-64 w-full bg-gray-100 flex items-center justify-center relative">
         <Image
           src="/template-photo/template.jpg"
@@ -40,7 +40,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {
       <div className="p-4 bg-gray-50">
         <button
           onClick={() => router.push(`/templates/${template.id}`)}
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors duration-300"
+          className="w-full bg-customPurple hover:bg-customPurpleLight text-white py-2 px-4 rounded-lg transition-colors duration-300"
         >
           Подробнее
         </button>

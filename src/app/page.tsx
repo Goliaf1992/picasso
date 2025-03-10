@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-import TemplateCard from "../app/components/template-card/TemplateCard";
-import MySwiper from "./components/swiper/Swiper";
-import VideoLogo from "./components/video-logo/VideoLogo";
-import {Template} from '../app/templates/[id]/page';
+import { Template } from "../app/templates/[id]/page";
 import HeroSection from "./components/hero-section/HeroSection";
 import TemplateSection from "./components/template-section/TemplateSection";
 import TestimonialsSection from "./components/testimonials/testimonials";
@@ -22,7 +19,7 @@ export default function Page() {
         "Обеспечивает безопасное проведение сложных хирургических манипуляций, минимизирует погрешности " +
         "и ускоряет процесс имплантации. Отличный выбор для опытных хирургов, работающих с нестандартными случаями.",
       modelUrl: "/models/guide.glb",
-      jawUrl:"/models/jaw-lower/lower.glb"
+      jawUrl: "/models/jaw-lower/lower.glb",
     },
     {
       id: 2,
@@ -34,7 +31,7 @@ export default function Page() {
         "и установку имплантов. Благодаря дополнительным направляющим и фиксаторам, он снижает риск ошибок " +
         "и повышает долговечность результатов операции. Подходит для широкого спектра клинических случаев.",
       modelUrl: "/models/guide.glb",
-      jawUrl:"/models/jaw-lower/lower.glb"
+      jawUrl: "/models/jaw-lower/lower.glb",
     },
     {
       id: 3,
@@ -46,22 +43,22 @@ export default function Page() {
         "под различные анатомические особенности пациента. Он идеально подходит для случаев, когда требуется " +
         "пошаговая установка имплантов с возможностью корректировки в процессе операции.",
       modelUrl: "/models/guide.glb",
-      jawUrl:"/models/jaw-lower/lower.glb"
+      jawUrl: "/models/jaw-lower/lower.glb",
     },
   ];
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-evenly text-white">
+    <div className="min-h-screen w-full flex flex-col items-center justify-evenly text-textLight">
       {/* Герой-секция */}
-      <HeroSection/>
+      <HeroSection />
       {/* Секция с карточками шаблонов */}
-     <TemplateSection templates={templates}/>
+      <TemplateSection templates={templates} />
       {/* Секция с отзывами */}
-     <TestimonialsSection/>
-     {/* Секция с обучением */}
-     <LearningSection/>
-     {/* Футер */}
-     <Footer/>
+      <TestimonialsSection />
+      {/* Секция с обучением */}
+      <LearningSection />
+      {/* Футер */}
+      <Footer />
     </div>
   );
 }
